@@ -4,6 +4,7 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  signOut,
 } from 'firebase/auth';
 
 const firebaseConfig = {
@@ -20,6 +21,10 @@ const auth = getAuth();
 
 export function signup(email, password) {
   return createUserWithEmailAndPassword(auth, email, password);
+}
+
+export function logout() {
+  return signOut(auth);
 }
 
 export function useAuth() {
