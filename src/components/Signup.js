@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Form, Button, Card, Alert } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { signup } from '../config/firebase';
+import { useNavigate } from 'react-router-dom';
 
 export default function Signup() {
   const emailRef = useRef();
@@ -10,6 +11,7 @@ export default function Signup() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
+  let navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -24,6 +26,7 @@ export default function Signup() {
       setLoading(true);
       await signup(emailRef.current.value, passwordRef.current.value);
       setSuccess('Your account successfully created.');
+      navigate('/');
     } catch {
       setError('Failed to create an account');
     }
